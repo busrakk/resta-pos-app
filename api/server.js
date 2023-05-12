@@ -15,6 +15,7 @@ const ticketRoute = require("./routes/numberOfTickets.js");
 const detailRoute = require("./routes/productsDetail.js");
 const incomesRoute = require("./routes/incomes.js");
 const expensesRoute = require("./routes/expenses.js");
+const dayTransactionsRoute = require("./routes/dayTransactions.js"); 
 
 const connect = async () => {
   try {
@@ -35,6 +36,7 @@ app.use("/api/tickets", ticketRoute);
 app.use("/api/details", detailRoute);
 app.use("/api/incomes", incomesRoute);
 app.use("/api/expenses", expensesRoute);
+app.use("/api/transactions", dayTransactionsRoute);
 
 app.listen(port, () => {
   connect();
