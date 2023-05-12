@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'); 
 
-const RevenueSchema = mongoose.Schema( // gelir modeli
+const ExpenseSchema = mongoose.Schema( // gelir modeli
     {
         aciklama: {type: String, required: true},
         tarih: {type: String, required: true},
@@ -12,5 +12,5 @@ const RevenueSchema = mongoose.Schema( // gelir modeli
     }
 )
 
-const Revenue = mongoose.model("revenues", RevenueSchema);
-module.exports = Revenue;
+const Expense = mongoose.model("expenses", ExpenseSchema);
+module.exports = Expense;

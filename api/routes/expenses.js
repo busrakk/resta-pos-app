@@ -1,15 +1,15 @@
-const Revenue = require("../models/Revenue");
+const Expense = require("../models/Expense");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const tickets = await Revenue.find().sort({ _id: -1 });
-    // res.send(tickets)
+    const expenses = await Expense.find().sort({ _id: -1 });
+    // res.send(expenses)
     res.status(200).json({
       status: "success",
-      message: "Revenues listed successfully",
-      data: tickets,
+      message: "expenses listed successfully",
+      data: expenses,
     });
   } catch (error) {
     res.status(400).json(error);
@@ -21,10 +21,10 @@ router.get("/", async (req, res) => {
 router.get("/:odeme_tipi", async (req, res) => {
   try {
     const odeme_tipi = req.params.odeme_tipi;
-    const tumGelirler = await Revenue.find({ odeme_tipi: odeme_tipi });
+    const tumGelirler = await Expense.find({ odeme_tipi: odeme_tipi });
     res.status(200).json({
       status: "success",
-      message: "Revenues listed successfully",
+      message: "Expenses listed successfully",
       data: tumGelirler,
     });
   } catch (error) {
@@ -34,12 +34,12 @@ router.get("/:odeme_tipi", async (req, res) => {
 
 router.post("/add", async (req, res) => {
   try {
-    const newRevenue = new Revenue(req.body);
-    await newRevenue.save();
+    const newExpense = new Expense(req.body);
+    await newExpense.save();
     res.status(201).json({
       status: "success",
-      message: "Ticket added successfully",
-      data: newRevenue,
+      message: "Expense added successfully",
+      data: newExpense,
     });
   } catch (error) {
     res.status(400).json(error);

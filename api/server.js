@@ -13,7 +13,8 @@ const categoryRoute = require("./routes/categories.js");
 const productRoute = require("./routes/products.js");
 const ticketRoute = require("./routes/numberOfTickets.js");
 const detailRoute = require("./routes/productsDetail.js");
-const revenuesRoute = require("./routes/revenues.js");
+const incomesRoute = require("./routes/incomes.js");
+const expensesRoute = require("./routes/expenses.js");
 
 const connect = async () => {
   try {
@@ -32,7 +33,8 @@ app.use("/api/categories", categoryRoute);
 app.use("/api/products", productRoute);
 app.use("/api/tickets", ticketRoute);
 app.use("/api/details", detailRoute);
-app.use("/api/revenues", revenuesRoute);
+app.use("/api/incomes", incomesRoute);
+app.use("/api/expenses", expensesRoute);
 
 app.listen(port, () => {
   connect();
