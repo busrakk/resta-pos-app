@@ -16,6 +16,7 @@ const detailRoute = require("./routes/productsDetail.js");
 const incomesRoute = require("./routes/incomes.js");
 const expensesRoute = require("./routes/expenses.js");
 const dayTransactionsRoute = require("./routes/dayTransactions.js"); 
+const refundsAndCancellationsRoute = require("./routes/refundsAndCancellations.js");
 
 const connect = async () => {
   try {
@@ -37,6 +38,7 @@ app.use("/api/details", detailRoute);
 app.use("/api/incomes", incomesRoute);
 app.use("/api/expenses", expensesRoute);
 app.use("/api/transactions", dayTransactionsRoute);
+app.use("/api/refund-and-cancel", refundsAndCancellationsRoute);
 
 app.listen(port, () => {
   connect();
