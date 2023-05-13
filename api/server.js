@@ -15,10 +15,11 @@ const ticketRoute = require("./routes/numberOfTickets.js");
 const detailRoute = require("./routes/productsDetail.js");
 const incomesRoute = require("./routes/incomes.js");
 const expensesRoute = require("./routes/expenses.js");
-const dayTransactionsRoute = require("./routes/dayTransactions.js"); 
+const dayTransactionsRoute = require("./routes/dayTransactions.js");
 const refundsAndCancellationsRoute = require("./routes/refundsAndCancellations.js");
 const tableInfoRoute = require("./routes/tableInfos.js");
-const tablePaymentRoute = require("./routes/tablePayments.js"); 
+const tablePaymentRoute = require("./routes/tablePayments.js");
+const restaurantInfoRoute = require("./routes/restaurantInfos.js");
 
 const connect = async () => {
   try {
@@ -43,6 +44,7 @@ app.use("/api/transactions", dayTransactionsRoute);
 app.use("/api/refund-and-cancel", refundsAndCancellationsRoute);
 app.use("/api/table-info", tableInfoRoute);
 app.use("/api/table-payment", tablePaymentRoute);
+app.use("/api/restaurants", restaurantInfoRoute);
 
 app.listen(port, () => {
   connect();
