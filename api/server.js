@@ -22,6 +22,7 @@ const tablePaymentRoute = require("./routes/tablePayments.js");
 const restaurantInfoRoute = require("./routes/restaurantInfos.js");
 const reservationRoute = require("./routes/reservations.js");
 const rezerveRoute = require("./routes/rezervePopup.js");
+const salesRoute = require("./routes/salesReport.js");
 
 const connect = async () => {
   try {
@@ -49,6 +50,7 @@ app.use("/api/table-payment", tablePaymentRoute);
 app.use("/api/restaurants", restaurantInfoRoute);
 app.use("/api/reservations", reservationRoute);
 app.use("/api/rezerve", rezerveRoute);
+app.use("/api/sales", salesRoute);
 
 app.listen(port, () => {
   connect();
