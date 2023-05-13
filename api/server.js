@@ -20,7 +20,7 @@ const refundsAndCancellationsRoute = require("./routes/refundsAndCancellations.j
 const tableInfoRoute = require("./routes/tableInfos.js");
 const tablePaymentRoute = require("./routes/tablePayments.js");
 const restaurantInfoRoute = require("./routes/restaurantInfos.js");
-
+const reservationRoute = require("./routes/reservations.js");
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
@@ -45,6 +45,7 @@ app.use("/api/refund-and-cancel", refundsAndCancellationsRoute);
 app.use("/api/table-info", tableInfoRoute);
 app.use("/api/table-payment", tablePaymentRoute);
 app.use("/api/restaurants", restaurantInfoRoute);
+app.use("/api/reservations", reservationRoute);
 
 app.listen(port, () => {
   connect();
