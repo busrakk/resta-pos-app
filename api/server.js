@@ -23,6 +23,7 @@ const restaurantInfoRoute = require("./routes/restaurantInfos.js");
 const reservationRoute = require("./routes/reservations.js");
 const rezerveRoute = require("./routes/rezervePopup.js");
 const salesRoute = require("./routes/salesReport.js");
+const productSalesReportRoute = require("./routes/productSalesReport.js");
 
 const connect = async () => {
   try {
@@ -51,6 +52,7 @@ app.use("/api/restaurants", restaurantInfoRoute);
 app.use("/api/reservations", reservationRoute);
 app.use("/api/rezerve", rezerveRoute);
 app.use("/api/sales", salesRoute);
+app.use("/api/product-sales", productSalesReportRoute);
 
 app.listen(port, () => {
   connect();
