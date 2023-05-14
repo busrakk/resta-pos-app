@@ -26,7 +26,7 @@ const salesRoute = require("./routes/salesReport.js");
 const productSalesReportRoute = require("./routes/productSalesReport.js");
 const orderRoute = require("./routes/orders.js");
 const orderPlacedRoute = require("./routes/ordersPlaced.js");
-
+const userRoute = require("./routes/user.js");
 
 const connect = async () => {
   try {
@@ -58,6 +58,7 @@ app.use("/api/sales", salesRoute);
 app.use("/api/product-sales", productSalesReportRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/orders-placed", orderPlacedRoute);
+app.use("/api/users", userRoute);
 
 app.listen(port, () => {
   connect();
