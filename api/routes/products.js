@@ -5,7 +5,10 @@ const router = express.Router();
 
 router.get("/get-products", async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate({
+      path: "urun_kategori",
+      model: "categories",
+    });;
     res.status(200).json({
       status: "success",
       messages: "Products listed successfully",
@@ -30,7 +33,7 @@ router.post("/add-product", async (req, res) => {
         urun_kategori: category,
         urun_fiyat: req.body.urun_fiyat,
         urun_detay: req.body.urun_detay,
-      });
+      })
       await newProduct.save();
       res.status(201).json({
         status: "success",

@@ -80,11 +80,11 @@ router.get("/:masa_tarih", async (req, res) => {
 
 router.get("/:uuid", async (req, res) => {
   try {
-    const reservation = await Reservation.find({
+    const rezerve = await RezervePopup.find({
       uuid: req.params.uuid,
     });
 
-    if (!reservation) {
+    if (!rezerve) {
       return res.status(404).json({
         status: "error",
         messages: error.message,
@@ -93,7 +93,7 @@ router.get("/:uuid", async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      messages: "Reservations listed successfully",
+      messages: "rezerves listed successfully",
       data: result,
     });
   } catch (error) {

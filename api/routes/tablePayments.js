@@ -5,7 +5,10 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const data = await TablePayment.find();
+    const data = await TablePayment.find().populate({
+      path: "masa_info",
+      model: "table-infos",
+    });
     res.status(200).json({
       status: "success",
       messages: "Table payment listed successfully",

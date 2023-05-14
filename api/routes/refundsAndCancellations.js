@@ -36,7 +36,10 @@ router.post("/add", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const data = await RefundAndCancellation.find();
+    const data = await RefundAndCancellation.find().populate({
+      path: "urun",
+      model: "products",
+    });
     res.status(200).json({
       status: "success",
       messages: "Refund anc cancellation listed successfully",
@@ -53,7 +56,10 @@ router.get("/", async (req, res) => {
 router.get("/:turu", async (req, res) => {
   try {
     const turu = req.params.turu;
-    const data = await RefundAndCancellation.find({ turu: turu });
+    const data = await RefundAndCancellation.find({ turu: turu }).populate({
+      path: "urun",
+      model: "products",
+    });
     res.status(200).json({
       status: "success",
       messages: "Data listed successfully",

@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     }).populate({
         path: "masa",
         model: "table-infos",
-      });;
+      });
     res.status(200).json({
       status: "success",
       messages: "Orders listed successfully",
@@ -65,7 +65,7 @@ router.get("/:masa_adi", async (req, res) => {
     );
     res.status(200).json({
       status: "success",
-      messages: "Products listed successfully",
+      messages: "Orders listed successfully",
       //data: result,
       data: results.filter((result) => result !== undefined),
     });
