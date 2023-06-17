@@ -27,6 +27,7 @@ const productSalesReportRoute = require("./routes/productSalesReport.js");
 const orderRoute = require("./routes/orders.js");
 const orderPlacedRoute = require("./routes/ordersPlaced.js");
 const userRoute = require("./routes/user.js");
+const printersRoute = require("./routes/printers.js");
 
 const connect = async () => {
   try {
@@ -59,6 +60,7 @@ app.use("/api/product-sales", productSalesReportRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/orders-placed", orderPlacedRoute);
 app.use("/api/users", userRoute);
+app.use("/api/printers", printersRoute);
 
 app.listen(port, () => {
   connect();
