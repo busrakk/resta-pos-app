@@ -9,7 +9,13 @@ const ProductSchema = mongoose.Schema(
     },
     urun_adi: { type: String, required: true },
     urun_fiyat: { type: String, required: true },
+    yazici_adi: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Printer",
+    },
     urun_detay: { type: String, required: true },
+    kategori_ip: { type: String, required: true },
+    urun_ip: { type: String, required: true },
   },
   {
     timestamps: true,

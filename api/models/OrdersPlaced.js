@@ -13,6 +13,8 @@ const OrdersPlacedSchema = mongoose.Schema(
     alman_adet: { type: String, required: true },
     alman_detay: { type: String, required: true },
     alman_odeme: { type: String, required: true },
+    kategori_ip: { type: String, required: true },
+    urun_ip: { type: String, required: true },
   },
   {
     timestamps: true,

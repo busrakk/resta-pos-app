@@ -59,6 +59,8 @@ router.get("/:masa_adi", async (req, res) => {
             alman_adet: order.alman_adet,
             alman_detay: order.alman_detay,
             alman_odeme: order.alman_odeme,
+            kategori_ip: order.kategori_ip,
+            urun_ip: order.urun_ip,
           };
         }
       })
@@ -99,6 +101,8 @@ router.post("/add", async (req, res) => {
       alman_adet: req.body.alman_adet,
       alman_detay: req.body.alman_detay,
       alman_odeme: req.body.alman_odeme,
+      kategori_ip: req.body.kategori_ip,
+      urun_ip: req.body.urun_ip,
     });
 
     await order.save();
@@ -124,7 +128,7 @@ router.put("/update", async (req, res) => {
         message: "Sipariş bulunamadı",
       });
     }
-    const { urunler, urun_fiyat_toplam, alman_adet, alman_detay, alman_odeme } =
+    const { urunler, urun_fiyat_toplam, alman_adet, alman_detay, alman_odeme, kategori_ip, urun_ip } =
       req.body;
 
     // Masa güncellenirse, siparişteki masa da güncellenmeli
@@ -165,6 +169,14 @@ router.put("/update", async (req, res) => {
     // Alman ödemenin güncellenmesi
     if (alman_odeme) {
       order.alman_odeme = alman_odeme;
+    }
+
+    if (kategori_ip) {
+      order.kategori_ip = kategori_ip;
+    }
+
+    if (urun_ip) {
+      order.urun_ip = urun_ip;
     }
     await order.save();
     res.status(200).json({

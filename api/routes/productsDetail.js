@@ -1,6 +1,7 @@
 const ProductsDetail = require("../models/ProductsDetail.js");
 const Product = require("../models/Product.js");
 const Category = require("../models/Category.js");
+const Printer = require("../models/Printer.js");
 const express = require("express");
 const router = express.Router();
 
@@ -13,9 +14,10 @@ router.get("/:urun_adi", async (req, res) => {
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
       const category = await Category.findById(product.urun_kategori);
+      const printer = await Printer.findById(product.yazici_adi);
       const productDetail = await ProductsDetail.findOne({
         urun: product._id,
-      });
+      })
       if (productDetail) {
         result.push({
           _id: product._id,
@@ -25,6 +27,9 @@ router.get("/:urun_adi", async (req, res) => {
           urun_detay: product.urun_detay,
           urun_detay_adi: productDetail.urun_detay_adi,
           urun_detay_fiyat: productDetail.urun_detay_fiyat,
+          yazici_adi: printer,
+          kategori_ip: product.kategori_ip,
+          urun_ip: product.urun_ip,
         });
       } else {
         result.push({
@@ -32,6 +37,9 @@ router.get("/:urun_adi", async (req, res) => {
           urun_adi: product.urun_adi,
           urun_kategori: category,
           urun_fiyat: product.urun_fiyat,
+          yazici_adi: printer,
+          kategori_ip: product.kategori_ip,
+          urun_ip: product.urun_ip,
         });
       }
     }
@@ -59,10 +67,10 @@ router.post("/add", async (req, res) => {
       });
     }
     const newDetail = new ProductsDetail({
-        urun: urun,
-        urun_detay_adi: req.body.urun_detay_adi,
-        urun_detay_fiyat: req.body.urun_detay_fiyat,
-      });
+      urun: urun,
+      urun_detay_adi: req.body.urun_detay_adi,
+      urun_detay_fiyat: req.body.urun_detay_fiyat,
+    });
     await newDetail.save();
     res.status(201).json({
       status: "success",
