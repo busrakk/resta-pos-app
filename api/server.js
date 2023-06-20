@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const authMiddleware = require("./middleware/authMiddleware");
+const { verifyToken, checkRole } = authMiddleware;
 
 const app = express();
 const cors = require("cors");
@@ -9,6 +11,7 @@ const port = 5000;
 dotenv.config();
 
 // routes
+const authRoute = require("./routes/auth");
 const categoryRoute = require("./routes/categories.js");
 const productRoute = require("./routes/products.js");
 const ticketRoute = require("./routes/numberOfTickets.js");
@@ -42,25 +45,26 @@ const connect = async () => {
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/categories", categoryRoute);
-app.use("/api/products", productRoute);
-app.use("/api/tickets", ticketRoute);
-app.use("/api/details", detailRoute);
-app.use("/api/incomes", incomesRoute);
-app.use("/api/expenses", expensesRoute);
-app.use("/api/transactions", dayTransactionsRoute);
-app.use("/api/refund-and-cancel", refundsAndCancellationsRoute);
-app.use("/api/table-info", tableInfoRoute);
-app.use("/api/table-payment", tablePaymentRoute);
-app.use("/api/restaurants", restaurantInfoRoute);
-app.use("/api/reservations", reservationRoute);
-app.use("/api/rezerve", rezerveRoute);
-app.use("/api/sales", salesRoute);
-app.use("/api/product-sales", productSalesReportRoute);
-app.use("/api/orders", orderRoute);
-app.use("/api/orders-placed", orderPlacedRoute);
-app.use("/api/users", userRoute);
-app.use("/api/printers", printersRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/categories", verifyToken, checkRole(["admin"]), categoryRoute);
+app.use("/api/products", verifyToken, checkRole(["admin"]), productRoute);
+app.use("/api/tickets", verifyToken, ticketRoute);
+app.use("/api/details", verifyToken, detailRoute);
+app.use("/api/incomes", verifyToken, incomesRoute);
+app.use("/api/expenses", verifyToken, expensesRoute);
+app.use("/api/transactions", verifyToken, dayTransactionsRoute);
+app.use("/api/refund-and-cancel", verifyToken, refundsAndCancellationsRoute);
+app.use("/api/table-info", verifyToken, tableInfoRoute);
+app.use("/api/table-payment", verifyToken, tablePaymentRoute);
+app.use("/api/restaurants", verifyToken, restaurantInfoRoute);
+app.use("/api/reservations", verifyToken, reservationRoute);
+app.use("/api/rezerve", verifyToken, rezerveRoute);
+app.use("/api/sales", verifyToken, salesRoute);
+app.use("/api/product-sales", verifyToken, productSalesReportRoute);
+app.use("/api/orders", verifyToken, orderRoute);
+app.use("/api/orders-placed", verifyToken, orderPlacedRoute);
+app.use("/api/users", verifyToken, userRoute);
+app.use("/api/printers", verifyToken, printersRoute);
 
 app.listen(port, () => {
   connect();
