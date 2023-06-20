@@ -20,21 +20,32 @@ router.get("/", async (req, res) => {
 
 router.get("/:kullanici_adi", async (req, res) => {
   try {
+    const kullaniciAdi = req.params.kullanici_adi;
+
     const data = await User.find({
       kullanici_adi: {
-        $regex: ".*" + req.params.kullanici_adi + ".*",
+        $regex: ".*" + kullaniciAdi + ".*",
         $options: "i",
       },
     });
+
+    if (data.length === 0) {
+      return res.status(404).json({
+        status: "error",
+        message: "Kullanıcı bulunamadı",
+      });
+    }
+
     res.status(200).json({
       status: "success",
-      messages: "User updated successfully",
+      message: "Kullanıcı bilgileri başarıyla getirildi",
       data: data,
     });
   } catch (error) {
-    res.status(400).json({
+    console.error("Kullanıcı bilgisi getirme hatası:", error);
+    res.status(500).json({
       status: "error",
-      messages: error.message,
+      message: "Bir hata oluştu",
     });
   }
 });
@@ -110,22 +121,30 @@ router.put("/update/:kullanici_adi", async (req, res) => {
 });
 
 router.delete("/delete/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
   try {
-    const userId = req.params.userId;
+    // Kullanıcıyı bul ve sil
     const deletedUser = await User.findByIdAndDelete(userId);
 
     if (!deletedUser) {
-      return res.status(404).send("Kullanıcı bulunamadı.");
+      return res.status(404).json({
+        status: "error",
+        message: "Kullanıcı bulunamadı",
+      });
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       status: "success",
-      messages: "User deleted successfully",
-      data: deletedUser,
+      message: "Kullanıcı başarıyla silindi",
+      deletedUser,
     });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("Bir hata oluştu.");
+  } catch (error) {
+    console.error("Kullanıcı silme hatası:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Bir hata oluştu",
+    });
   }
 });
 
